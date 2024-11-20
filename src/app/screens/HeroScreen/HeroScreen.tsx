@@ -1,14 +1,18 @@
 'use client';
 import React from "react";
-// import LeaderShipUpdate from "@/app/components/Hero/LeaderShipUpdate";
-import LatestNewsLetter from "@/app/components/Hero/LatestNewsLetter";
-import Blog from "@/app/components/Hero/Blog";
-import Video from "@/app/components/Hero/Video";
-import { CenteredModal } from "@/app/components/CenteredModal";
+// import LeaderShipUpdate from "../../components/Hero/LeaderShipUpdate";
+// import LatestNewsLetter from "../../components/Hero/LatestNewsLetter";
+import LatestNewsLetter from "../../components/Hero/LatestNewsLetter";
+import Blog from "../../components/Hero/Blog";
+import Video from "../../components/Hero/Video";
+import { CenteredModal } from "../../components/CenteredModal";
 import { LeaderShipUpdateData } from "../../data/LeaderShipUpdateData";
 import { latestNewsLetterData } from "../../data/latestNewsLetterData";
 import { videoData } from "../../data/videoData";
 import { blogData } from "../../data/blogData";
+import { TechnologyTuneData } from "../../data/TechnologyTuneData";
+import { TechTopRecData } from "../../data/TechTopRecData";
+import Tech from "../tech/Tech";
 // Define the updated type for the leadership update data
 
 export interface Media {
@@ -179,7 +183,7 @@ export const HeroScreen = (): JSX.Element => {
   // Updated leadership data
   
 
-  return (
+  return (<>
     <div className="grid grid-cols-12 gap-4">
       {/* Leadership Update (col-1) Start */}
      <div className="col-span-3 px-8 ">
@@ -208,5 +212,7 @@ export const HeroScreen = (): JSX.Element => {
       </div>
       {/* 3rd-col End */}
     </div>
+    <Tech TechnologyTuneData={TechnologyTuneData}  TechTopRecData={TechTopRecData}/>
+    </>
   );
 };

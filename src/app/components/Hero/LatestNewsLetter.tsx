@@ -78,16 +78,19 @@ const LatestNewsLetter: React.FC<LatestNewsLetterPrpos> = ({ latestNewsLetterDat
 
         
 
-          <div className="relative h-[368px] w-full">
+          <div className="relative h-1/2 w-full">
+          
             <Image
               alt="Rectangle"
-              src={latestNewsLetterData.results.Content[0].LatestNewsLetter.newsletter.data.attributes.homePageImage.data.attributes.url}
+              // src={`${latestNewsLetterData.results.Content[0].LatestNewsLetter.newsletter.data.attributes.homePageImage.data.attributes.urls}` || 'https://cn-strapidev-v4.s3.amazonaws.com/Landscape_4_3_496527b3c8.png'}
+              src='https://cn-strapidev-v4.s3.amazonaws.com/Landscape_4_3_496527b3c8.png'
               layout="fill" // Image will fill the parent container
               objectFit="cover" // Maintain the object-cover behavior
             />
+           
           </div>
 
-          <div className="flex flex-col items-start gap-3.5 relative self-stretch w-full flex-[0_0_auto] ">
+          <div className="flex flex-col items-start gap-3.5 relative self-stretch w-full flex-[0_0_auto] bg-slate-100">
             <div className="relative self-stretch mt-8 [font-family:'Miller_Display-Roman',Helvetica] font-normal text-black text-[26px] tracking-[0] leading-[normal] ">
              {latestNewsLetterData.results.Content[0].Title}
             </div>

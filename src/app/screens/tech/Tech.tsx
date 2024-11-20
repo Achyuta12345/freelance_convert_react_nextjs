@@ -77,7 +77,7 @@ interface TechProps {
 
 export default function Tech({ TechnologyTuneData, TechTopRecData }: TechProps) {
   return (
-    <div className="grid grid-cols-12 gap-4">
+    <div className="grid grid-cols-12 gap-4 bg-slate-100 ">
       <div className="col-span-3 px-8 border-r-2 border-r-gray-300 border:w-2 ">
         <TechnologyTune TechnologyTuneData={TechnologyTuneData} />
       </div>
