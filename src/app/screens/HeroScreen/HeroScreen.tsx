@@ -6,7 +6,7 @@ import {LatestNewsLetter} from "../../components/Hero/LatestNewsLetter";
 import Blog from "../../components/Hero/Blog";
 import Video from "../../components/Hero/Video";
 import { CenteredModal } from "../../components/CenteredModal";
-import { LeaderShipUpdateData } from "../../data/LeaderShipUpdateData";
+import { leaderShipUpdateData } from "../../data/LeaderShipUpdateData";
 import { latestNewsLetterData } from "../../data/latestNewsLetterData";
 import { videoData } from "../../data/videoData";
 import { blogData } from "../../data/blogData";

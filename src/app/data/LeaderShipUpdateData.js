@@ -1,6 +1,6 @@
 
 
-  export const LeaderShipUpdateData = {
+  export const leaderShipUpdateData = {
     status: 200,
     results: {
       id: 8,
