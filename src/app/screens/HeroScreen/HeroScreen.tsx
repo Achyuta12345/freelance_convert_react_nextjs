@@ -2,7 +2,7 @@
 import React from "react";
 // import LeaderShipUpdate from "../../components/Hero/LeaderShipUpdate";
 // import LatestNewsLetter from "../../components/Hero/LatestNewsLetter";
-import LatestNewsLetter from "../../components/Hero/LatestNewsLetter";
+import {LatestNewsLetter} from "../../components/Hero/LatestNewsLetter";
 import Blog from "../../components/Hero/Blog";
 import Video from "../../components/Hero/Video";
 import { CenteredModal } from "../../components/CenteredModal";
@@ -35,7 +35,7 @@ export interface Localization {
   created_at?: string;
 }
 
-export interface LeaderShipUpdateData {
+export interface leaderShipUpdateData {
   status: number;
   results: {
     id: number;
@@ -188,7 +188,7 @@ export const HeroScreen = (): JSX.Element => {
       {/* Leadership Update (col-1) Start */}
      <div className="col-span-3 px-8 ">
      <CenteredModal
-        LeaderShipUpdateData={LeaderShipUpdateData} // Pass your leadership update data here
+        leaderShipUpdateData={leaderShipUpdateData} // Pass your leadership update data here
       />
      </div>
        {/* <LeaderShipUpdate leaderShipUpdateData={leaderShipUpdateData} /> */}

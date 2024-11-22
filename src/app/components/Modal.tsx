@@ -7,7 +7,8 @@ interface ModalProps {
   children: ReactNode;
   className?: string;
   ariaLabel?: string;
-  closeOnOverlayClick?: boolean; // Optional prop to control overlay click behavior
+  closeOnOverlayClick?: boolean; 
+  presenceKey: string;// Optional prop to control overlay click behavior
 }
 
 export const Modal: React.FC<ModalProps> = ({

@@ -9,7 +9,7 @@ import { format,parseISO } from "date-fns";
 // import Head from 'next/head';
 // import { useRouter } from 'next/router';
 
-export interface LeaderShipUpdateData {
+export interface leaderShipUpdateData {
   status: number;
   results: {
     id: number;
@@ -63,12 +63,12 @@ export interface LeaderShipUpdateData {
 
 
 interface CenteredModalProps {
-  LeaderShipUpdateData: LeaderShipUpdateData;
+  leaderShipUpdateData: leaderShipUpdateData;
 }
 
-export function CenteredModal({ LeaderShipUpdateData }: CenteredModalProps) {
+export function CenteredModal({ leaderShipUpdateData }: CenteredModalProps) {
   // const router = useRouter();
-//  const modalTitle = LeaderShipUpdateData.results.Content[0]?.title;
+//  const modalTitle = leaderShipUpdateData.results.Content[0]?.title;
  // console.log("data------", props)
  const [isOpen, setOpen] = useState(false);
  const [i, setI] = useState(0);
@@ -144,9 +144,9 @@ const handleItemClickInModal = (
    const [currentPage, setCurrentPage] = useState(1);
    const itemsPerPage = 10;
    // Calculate the number of pages
-   const totalPages = LeaderShipUpdateData.results.Content[0]?.items && Math.ceil(LeaderShipUpdateData.results.Content[0].items.length / itemsPerPage);
+   const totalPages = leaderShipUpdateData.results.Content[0]?.items && Math.ceil(leaderShipUpdateData.results.Content[0].items.length / itemsPerPage);
    // Get the items to be displayed on the current page
-   const currentItems = LeaderShipUpdateData.results.Content[0]?.items && LeaderShipUpdateData.results.Content[0].items.slice(
+   const currentItems = leaderShipUpdateData.results.Content[0]?.items && leaderShipUpdateData.results.Content[0].items.slice(
      (currentPage - 1) * itemsPerPage,
      currentPage * itemsPerPage
    );
@@ -167,28 +167,28 @@ const handleItemClickInModal = (
 
  return (
    <Section
-     id={LeaderShipUpdateData.results.Content[0]?.navigationSlug || "centeredModal"}
-    //  className={className(LeaderShipUpdateData.results.Content[0]?.colorTheme === "Black" && "bg-black text-white")}
+     id={leaderShipUpdateData.results.Content[0]?.navigationSlug || "centeredModal"}
+    //  className={className(leaderShipUpdateData.results.Content[0]?.colorTheme === "Black" && "bg-black text-white")}
     className=""
    >
-     <legend style={{visibility:"hidden"}}>{LeaderShipUpdateData.results.Content[0]?.navigationSlug}</legend>
-     {LeaderShipUpdateData.results.Content[0]?.title && (
+     <legend style={{visibility:"hidden"}}>{leaderShipUpdateData.results.Content[0]?.navigationSlug}</legend>
+     {leaderShipUpdateData.results.Content[0]?.title && (
        <div className=" py-1 px-2 md:px-2 ">
-         {LeaderShipUpdateData.results.Content[0]?.title && (
-           <span className="border-b-2 border-black font-semibold py-1 ml-6 ">{LeaderShipUpdateData.results.Content[0]?.title}</span>
+         {leaderShipUpdateData.results.Content[0]?.title && (
+           <span className="border-b-2 border-black font-semibold py-1 ml-6 ">{leaderShipUpdateData.results.Content[0]?.title}</span>
           
           
          )}
-         {LeaderShipUpdateData.results.Content[0]?.subtitle && (
-           <p className="ProximaNova-font technology-update-sublititle font-bold text-base text-[#131313] mt-6 px-6">{LeaderShipUpdateData.results.Content[0]?.subtitle} </p>
+         {leaderShipUpdateData.results.Content[0]?.subtitle && (
+           <p className="ProximaNova-font technology-update-sublititle font-bold text-base text-[#131313] mt-6 px-6">{leaderShipUpdateData.results.Content[0]?.subtitle} </p>
          )}
 
 
          <Modal
            isOpen={isOpen}
            close={close}
-           presenceKey={LeaderShipUpdateData.results.Content[0]?.title}
-           ariaLabel={LeaderShipUpdateData.results.Content[0]?.title || ""}
+           presenceKey={leaderShipUpdateData.results.Content[0]?.title}
+           ariaLabel={leaderShipUpdateData.results.Content[0]?.title || ""}
            className="justify-end"
          >
            <section
@@ -215,9 +215,12 @@ const handleItemClickInModal = (
                </button>
                <button
                  onClick={close}
-                 className="absolute btn-close z-10 right-4 top-4"
+                 className="absolute btn-close z-10 right-12 top-4"
                >
-                 <img src="/images/misc/close-x.svg" />
+               
+                 <img src="/images/close-x.svg" alt="Close" />
+
+                 
                </button>
 
 
@@ -235,22 +238,22 @@ const handleItemClickInModal = (
                        "mb-8 md:mb-0"
                      )}
                    >
-                     {LeaderShipUpdateData.results.Content[0]?.items &&
-                       LeaderShipUpdateData.results.Content[0]?.items.find((item : object)=> {
+                     {leaderShipUpdateData.results.Content[0]?.items &&
+                       leaderShipUpdateData.results.Content[0]?.items.find((item : object)=> {
                                        
                        return item.id == i
 
                        })?.modalContent?.media && (
                          <File
-                           {...LeaderShipUpdateData.results.Content[0]?.items.find((item : any)=> item.id == i)?.modalContent?.media?.data?.attributes}
+                           {...leaderShipUpdateData.results.Content[0]?.items.find((item : any)=> item.id == i)?.modalContent?.media?.data?.attributes}
                          />
                        )}
                    </div>
                  </div>
                  <p className="text-sm">
-                   {LeaderShipUpdateData.results.Content[0]?.items &&
-                    LeaderShipUpdateData.results.Content[0]?.items.find((item : object)=> item?.id == i)?.modalContent?.Text && (
-                       <RichText text={LeaderShipUpdateData.results.Content[0]?.items.find((item : object)=> item.id == i)?.modalContent?.Text || ""} />
+                   {leaderShipUpdateData.results.Content[0]?.items &&
+                    leaderShipUpdateData.results.Content[0]?.items.find((item : object)=> item?.id == i)?.modalContent?.Text && (
+                       <RichText text={leaderShipUpdateData.results.Content[0]?.items.find((item : object)=> item.id == i)?.modalContent?.Text || ""} />
                      )}
                  </p>
                </div>
@@ -327,7 +330,7 @@ const handleItemClickInModal = (
 
 
          <div className="px-6 py-4">
- {LeaderShipUpdateData.results.Content[0]?.items && LeaderShipUpdateData.results.Content[0]?.items.slice(0, 4).map((item, i) => {
+ {leaderShipUpdateData.results.Content[0]?.items && leaderShipUpdateData.results.Content[0]?.items.slice(0, 4).map((item, i) => {
    let formattedDate = ""; // Define formattedDate here
   
    if (item && item.publishedDate) {

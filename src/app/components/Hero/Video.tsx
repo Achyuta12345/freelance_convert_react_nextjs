@@ -18,6 +18,7 @@ const Video: React.FC<VideoPrpos>=({videoData})=> {
   className="w-full h-full object-cover"
   loop
   autoPlay
+  muted
   
 />
           </div>
