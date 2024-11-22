@@ -1,8 +1,11 @@
-export function lowercaseKeys(obj: {}) {
-    return Object.fromEntries(
-      Object.entries(obj).map(([k, v]) => [k[0].toLowerCase() + k.slice(1), v])
-    );
-  }
+export function lowercaseKeys(obj: { [key: string]: unknown }): { [key: string]: unknown } {
+  return Object.fromEntries(
+    Object.entries(obj).map(([k, v]) => [k[0].toLowerCase() + k.slice(1), v])
+  );
+}
+
+
+
   
   export function unEscapeHTML(htmlStr : string){
     htmlStr = htmlStr.replace(/&lt;/g , "<");     

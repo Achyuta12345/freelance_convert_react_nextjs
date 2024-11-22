@@ -1,8 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import Carousel from './Carousel';
-import Modal from '@/app/components/Modal/Modal';
-import {modalData} from '../../data/modalData'
+import Modal from '@/app/components/RecsModal';
+import {modalData} from '../../app/data/homePageData'
 interface LandingMediaType {
   id: number;
   url: string;

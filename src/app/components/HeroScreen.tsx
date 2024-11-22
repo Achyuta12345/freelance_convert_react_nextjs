@@ -2,28 +2,24 @@
 import React from "react";
 // import LeaderShipUpdate from "../../components/Hero/LeaderShipUpdate";
 // import LatestNewsLetter from "../../components/Hero/LatestNewsLetter";
-import {LatestNewsLetter} from "../../components/Hero/LatestNewsLetter";
-import Blog from "../../components/Hero/Blog";
-import Video from "../../components/Hero/Video";
-import { CenteredModal } from "../../components/CenteredModal";
-import { leaderShipUpdateData } from "../../data/LeaderShipUpdateData";
-import { latestNewsLetterData } from "../../data/latestNewsLetterData";
-import { videoData } from "../../data/videoData";
-import { blogData } from "../../data/blogData";
-import { TechnologyTuneData } from "../../data/TechnologyTuneData";
-import { TechTopRecData } from "../../data/TechTopRecData";
-import Tech from "../tech/Tech";
+import {LatestNewsLetter} from "./LatestNewsLetter";
+import Blog from "./Blog";
+import Video from "./Video";
+import { CenteredModal } from "./CenteredModal";
+import { centeredModalData } from "../data/homePageData";
+import { latestNewsLetterData } from "../data/homePageData";
+import { videoData } from "../data/homePageData";
+import { blogData } from "../data/homePageData";
+import { TechnologyTuneData } from "../data/homePageData";
+import { TechTopRecData } from "../data/homePageData";
+import Tech from "./Tech";
 // Define the updated type for the leadership update data
 
-export interface Media {
-  id: number;
+interface Media {
+  id: string;
   url: string;
   mimeType: string;
   size: number;
-  alternativeText?: string;
-  caption?: string;
-  width?: number;
-  height?: number;
 }
 
 export interface Localization {
@@ -35,7 +31,7 @@ export interface Localization {
   created_at?: string;
 }
 
-export interface leaderShipUpdateData {
+interface centeredModalData {
   status: number;
   results: {
     id: number;
@@ -52,9 +48,9 @@ export interface leaderShipUpdateData {
     featuredTitle: string | null;
     Content: Array<{
       __typename: string;
+      colorTheme: string;
       title: string;
       subtitle: string;
-      colorTheme:string;
       navigationSlug: string;
       items: Array<{
         id: string;
@@ -63,17 +59,18 @@ export interface leaderShipUpdateData {
         modalContent: {
           Text: string;
           modalTitle: string | null;
-          media:{
-            data:{attributes:string;}
-            },
+          media?: { data: { attributes: string } };
         };
       }>;
     }>;
-    landingMedia: Media; // Adjust the type if you have more details about `landingMedia`
-    featuredMedia: unknown  | null; // Adjust the type if you have more details about `featuredMedia`
-    localizations: Localization; // Adjust the type if you have more details about `localizations`
+    landingMedia: unknown[]; // Adjust as needed
+    featuredMedia: unknown | null;
+    localizations: unknown[]; // Adjust as needed
   };
 }
+
+
+
 
 export interface LatestNewsLetterData {
   status: number;
@@ -112,13 +109,31 @@ export interface LatestNewsLetterData {
             };
           };
         };
+        items: Array<{
+          id: string;
+          media: string;
+          title: string;
+          text: string;
+          link: string;
+          layout: string;
+          size: string;
+          margin: string;
+          displaySeperator: boolean;
+          navSlug: string;
+          colorTheme: string;
+          modal: {
+            title: string;
+            content: string;
+          };
+        }>;
       };
     }>;
-    landingMedia: Media; // Adjust if you have more details about `landingMedia`
-    featuredMedia: unknown | null; // Adjust the type if you know more details about `featuredMedia`
-    localizations: Localization; // Adjust if you have more details about `localizations`
+    landingMedia: Media; // Adjust based on `landingMedia` structure
+    featuredMedia: unknown | null; // Replace `unknown` with the appropriate type if available
+    localizations: Localization; // Adjust based on the structure of `localizations`
   };
 }
+
 
 export interface BlogData {
   status: number;
@@ -188,10 +203,10 @@ export const HeroScreen = (): JSX.Element => {
       {/* Leadership Update (col-1) Start */}
      <div className="col-span-3 px-8 ">
      <CenteredModal
-        leaderShipUpdateData={leaderShipUpdateData} // Pass your leadership update data here
+        centeredModalData={centeredModalData} // Pass your leadership update data here
       />
      </div>
-       {/* <LeaderShipUpdate leaderShipUpdateData={leaderShipUpdateData} /> */}
+       {/* <LeaderShipUpdate centeredModalData={centeredModalData} /> */}
       {/* Leadership Update (col-1) End */}
 
       {/* Latest News Letter (2nd-col) Start */}
@@ -203,11 +218,11 @@ export const HeroScreen = (): JSX.Element => {
       {/* 3rd-col Start */}
       <div className="col-span-3 px-8">
         {/* Blog Start */}
-        <Blog blogData={blogData} />
+        {/* <Blog blogData={blogData} /> */}
         {/* Blog End */}
 
         {/* Video Start */}
-        <Video videoData={videoData} />
+        {/* <Video videoData={videoData} /> */}
         {/* Video End */}
       </div>
       {/* 3rd-col End */}

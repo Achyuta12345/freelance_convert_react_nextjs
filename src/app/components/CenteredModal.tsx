@@ -1,15 +1,24 @@
 import className from "classnames";
 // import { CenteredModal as TextType } from "types";
-import {RichText}  from "./RichText";
-import { Section } from "./Section";
-import {  Modal } from "./Modal";
-import { File } from "./File";
+import {RichText}  from "./existingComponent/RichText";
+import { Section } from "./existingComponent/Section";
+import {  Modal } from "./existingComponent/Modal";
+import { File } from "./existingComponent/File";
 import { useState, useEffect } from "react";
 import { format,parseISO } from "date-fns";
 // import Head from 'next/head';
 // import { useRouter } from 'next/router';
 
-export interface leaderShipUpdateData {
+
+ 
+interface Media {
+  id: string;
+  url: string;
+  mimeType: string;
+  size: number;
+}
+
+interface centeredModalData {
   status: number;
   results: {
     id: number;
@@ -26,9 +35,9 @@ export interface leaderShipUpdateData {
     featuredTitle: string | null;
     Content: Array<{
       __typename: string;
+      colorTheme: string;
       title: string;
       subtitle: string;
-      colorTheme:string;
       navigationSlug: string;
       items: Array<{
         id: string;
@@ -37,38 +46,29 @@ export interface leaderShipUpdateData {
         modalContent: {
           Text: string;
           modalTitle: string | null;
-          media:{
-          data:{attributes:string;}
-          },
+          media?: { data: { attributes: string } };
         };
       }>;
     }>;
-    landingMedia: Array<{
-      id: number;
-      url: string;
-      altText: string;
-    }>; // Replace with the exact structure of `landingMedia`
-    featuredMedia: {
-      id: number;
-      url: string;
-      altText: string;
-    } | null; // Replace with the exact structure of `featuredMedia`
-    localizations: Array<{
-      locale: string;
-      id: number;
-    }>; // Replace with the exact structure of `localizations`
+    landingMedia: unknown[]; // Adjust as needed
+    featuredMedia: unknown | null;
+    localizations: unknown[]; // Adjust as needed
   };
 }
 
 
 
+
+
+
+
 interface CenteredModalProps {
-  leaderShipUpdateData: leaderShipUpdateData;
+  centeredModalData: centeredModalData;
 }
 
-export function CenteredModal({ leaderShipUpdateData }: CenteredModalProps) {
+export function CenteredModal({ centeredModalData }: CenteredModalProps) {
   // const router = useRouter();
-//  const modalTitle = leaderShipUpdateData.results.Content[0]?.title;
+//  const modalTitle = centeredModalData.results.Content[0]?.title;
  // console.log("data------", props)
  const [isOpen, setOpen] = useState(false);
  const [i, setI] = useState(0);
@@ -144,9 +144,9 @@ const handleItemClickInModal = (
    const [currentPage, setCurrentPage] = useState(1);
    const itemsPerPage = 10;
    // Calculate the number of pages
-   const totalPages = leaderShipUpdateData.results.Content[0]?.items && Math.ceil(leaderShipUpdateData.results.Content[0].items.length / itemsPerPage);
+   const totalPages = centeredModalData.results.Content[0].items && Math.ceil(centeredModalData.results.Content[0].items.length / itemsPerPage);
    // Get the items to be displayed on the current page
-   const currentItems = leaderShipUpdateData.results.Content[0]?.items && leaderShipUpdateData.results.Content[0].items.slice(
+   const currentItems = centeredModalData.results.Content[0]?.items && centeredModalData.results.Content[0].items.slice(
      (currentPage - 1) * itemsPerPage,
      currentPage * itemsPerPage
    );
@@ -167,28 +167,29 @@ const handleItemClickInModal = (
 
  return (
    <Section
-     id={leaderShipUpdateData.results.Content[0]?.navigationSlug || "centeredModal"}
-    //  className={className(leaderShipUpdateData.results.Content[0]?.colorTheme === "Black" && "bg-black text-white")}
+    //  id={centeredModalData.results.Content?.navigationSlug || "centeredModal"}
+     id={centeredModalData.results.Content[0]?.navigationSlug || "centeredModal"}
+    //  className={className(centeredModalData.results.Content[0]?.colorTheme === "Black" && "bg-black text-white")}
     className=""
    >
-     <legend style={{visibility:"hidden"}}>{leaderShipUpdateData.results.Content[0]?.navigationSlug}</legend>
-     {leaderShipUpdateData.results.Content[0]?.title && (
+     <legend style={{visibility:"hidden"}}>{centeredModalData.results.Content[0]?.navigationSlug}</legend>
+     {centeredModalData.results.Content[0]?.title && (
        <div className=" py-1 px-2 md:px-2 ">
-         {leaderShipUpdateData.results.Content[0]?.title && (
-           <span className="border-b-2 border-black font-semibold py-1 ml-6 ">{leaderShipUpdateData.results.Content[0]?.title}</span>
+         {centeredModalData.results.Content[0]?.title && (
+           <span className="border-b-2 border-black font-semibold py-1 ml-6 ">{centeredModalData.results.Content[0]?.title}</span>
           
           
          )}
-         {leaderShipUpdateData.results.Content[0]?.subtitle && (
-           <p className="ProximaNova-font technology-update-sublititle font-bold text-base text-[#131313] mt-6 px-6">{leaderShipUpdateData.results.Content[0]?.subtitle} </p>
+         {centeredModalData.results.Content[0]?.subtitle && (
+           <p className="ProximaNova-font technology-update-sublititle font-bold text-base text-[#131313] mt-6 px-6">{centeredModalData.results.Content[0]?.subtitle} </p>
          )}
 
 
          <Modal
            isOpen={isOpen}
            close={close}
-           presenceKey={leaderShipUpdateData.results.Content[0]?.title}
-           ariaLabel={leaderShipUpdateData.results.Content[0]?.title || ""}
+           presenceKey={centeredModalData.results.Content[0]?.title}
+           ariaLabel={centeredModalData.results.Content[0]?.title || ""}
            className="justify-end"
          >
            <section
@@ -238,22 +239,26 @@ const handleItemClickInModal = (
                        "mb-8 md:mb-0"
                      )}
                    >
-                     {leaderShipUpdateData.results.Content[0]?.items &&
-                       leaderShipUpdateData.results.Content[0]?.items.find((item : object)=> {
+                     {centeredModalData.results.Content[0]?.items &&
+                       centeredModalData.results.Content[0]?.items.find((item : any)=> {
                                        
                        return item.id == i
 
                        })?.modalContent?.media && (
+                        //  <File
+                        //    {...centeredModalData.results.Content[0]?.items.find((item : any)=> item.id == i).}
+                        //  />
                          <File
-                           {...leaderShipUpdateData.results.Content[0]?.items.find((item : any)=> item.id == i)?.modalContent?.media?.data?.attributes}
+                           url="Hello"
+                           alt="sgsdgdf"
                          />
                        )}
                    </div>
                  </div>
                  <p className="text-sm">
-                   {leaderShipUpdateData.results.Content[0]?.items &&
-                    leaderShipUpdateData.results.Content[0]?.items.find((item : object)=> item?.id == i)?.modalContent?.Text && (
-                       <RichText text={leaderShipUpdateData.results.Content[0]?.items.find((item : object)=> item.id == i)?.modalContent?.Text || ""} />
+                   {centeredModalData.results.Content[0]?.items &&
+                    centeredModalData.results.Content[0]?.items.find((item : any)=> item?.id == i)?.modalContent?.Text && (
+                       <RichText text={centeredModalData.results.Content[0]?.items.find((item : any)=> item.id == i)?.modalContent?.Text || ""} />
                      )}
                  </p>
                </div>
@@ -330,7 +335,7 @@ const handleItemClickInModal = (
 
 
          <div className="px-6 py-4">
- {leaderShipUpdateData.results.Content[0]?.items && leaderShipUpdateData.results.Content[0]?.items.slice(0, 4).map((item, i) => {
+ {centeredModalData.results.Content[0]?.items && centeredModalData.results.Content[0]?.items.slice(0, 4).map((item, i) => {
    let formattedDate = ""; // Define formattedDate here
   
    if (item && item.publishedDate) {

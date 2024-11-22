@@ -1,4 +1,4 @@
-import { BlogData, Localization, Media } from '@/app/screens/HeroScreen/HeroScreen';
+import { BlogData, Localization, Media } from '@/app/components/HeroScreen';
 import Image from 'next/image'
 import React from 'react'
 

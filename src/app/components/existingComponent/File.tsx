@@ -11,3 +11,4 @@ export const File: React.FC<FileProps> = ({ url, alt, ...props }) => (
     <img src={url} alt={alt} {...props} />
   </a>
 );
+
