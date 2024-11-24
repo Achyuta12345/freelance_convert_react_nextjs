@@ -159,9 +159,9 @@ export interface BlogData {
         title: string;
       };
     }>;
-    landingMedia: Media; // If you have a more specific type for `landingMedia`, replace `any`
+    landingMedia: Media | {} | null; // If you have a more specific type for `landingMedia`, replace `any`
     featuredMedia: unknown | null; // Adjust the type of `featuredMedia` if necessary
-    localizations: Localization; // Replace `any` with a more specific type if available
+    localizations: Localization[]; // Replace `any` with a more specific type if available
   };
 }
 export interface videoData {
@@ -188,9 +188,9 @@ export interface videoData {
         title: string;
       };
     }>;
-    landingMedia: Media; // If you have a more specific type for `landingMedia`, replace `any`
+    landingMedia: Media | {} | null; // If you have a more specific type for `landingMedia`, replace `any`
     featuredMedia: unknown | null; // Adjust the type of `featuredMedia` if necessary
-    localizations: Localization; // Replace `any` with a more specific type if available
+    localizations: Localization[]; // Replace `any` with a more specific type if available
   };
 }
 
@@ -218,11 +218,11 @@ export const HeroScreen = (): JSX.Element => {
       {/* 3rd-col Start */}
       <div className="col-span-3 px-8">
         {/* Blog Start */}
-        {/* <Blog blogData={blogData} /> */}
+        <Blog blogData={blogData} />
         {/* Blog End */}
 
         {/* Video Start */}
-        {/* <Video videoData={videoData} /> */}
+        <Video videoData={videoData} />
         {/* Video End */}
       </div>
       {/* 3rd-col End */}

@@ -36,16 +36,14 @@ interface NewsletterItem {
 }
 
 
-export interface Media {
+type Media = {
   id: number;
   url: string;
   mimeType: string;
   size: number;
-  alternativeText?: string;
-  caption?: string;
-  width?: number;
-  height?: number;
-}
+};
+
+
 
 export interface Localization {
   id: number;
@@ -55,7 +53,54 @@ export interface Localization {
   published_at?: string;
   created_at?: string;
 }
-export interface LatestNewsLetterData {
+
+type LatestNewsLetterItem = {
+  id: string;
+  media: string;
+  title: string;
+  text: string;
+  link: string;
+  layout: string;
+  size: string;
+  margin: string;
+  displaySeperator: boolean;
+  navSlug: string;
+  colorTheme: string;
+  modal: {
+    title: string;
+    content: string;
+  };
+};
+
+type LatestNewsLetter = {
+  newsletter: {
+    data: {
+      attributes: {
+        title: string;
+        subjectLine: string | null;
+        content: string;
+        homePageImage: {
+          data: {
+            attributes: {
+              url: string;
+              mime: string;
+            };
+          };
+        };
+      };
+    };
+  };
+  items: LatestNewsLetterItem[];
+};
+
+type ContentItem = {
+  Title: string;
+  description: string;
+  navigationSlug: string;
+  LatestNewsLetter: LatestNewsLetter;
+};
+
+type LatestNewsLetterData = {
   status: number;
   results: {
     id: number;
@@ -70,53 +115,12 @@ export interface LatestNewsLetterData {
     title: string | null;
     landingTitle: string | null;
     featuredTitle: string | null;
-    Content: Array<{
-      Title: string;
-      description: string;
-      navigationSlug: string;
-      LatestNewsLetter: {
-        newsletter: {
-          data: {
-            attributes: {
-              title: string;
-              subjectLine: string | null;
-              content: string;
-              homePageImage: {
-                data: {
-                  attributes: {
-                    url: string;
-                    mime: string;
-                  };
-                };
-              };
-            };
-          };
-        };
-        items: Array<{
-          id: string;
-          media: string;
-          title: string;
-          text: string;
-          link: string;
-          layout: string;
-          size: string;
-          margin: string;
-          displaySeperator: boolean;
-          navSlug: string;
-          colorTheme: string;
-          modal: {
-            title: string;
-            content: string;
-          };
-        }>;
-      };
-    }>;
-    landingMedia: Media; // Adjust based on `landingMedia` structure
-    featuredMedia: unknown | null; // Replace `unknown` with the appropriate type if available
-    localizations: Localization; // Adjust based on the structure of `localizations`
+    Content: ContentItem[];
+    landingMedia: Media;
+    featuredMedia: Media | null;
+    localizations: any[];
   };
-}
-
+};
 
 interface LatestNewsLetterProps {
   latestNewsLetterData: LatestNewsLetterData;
@@ -166,19 +170,19 @@ let title ='';
  const open = (modal: ModalType,isFromUrl:any = false) => {
    setOpen(true);
    setModalProps(modal);
-   if(!window.location.hash.includes("~ltnmodal") &&
-   !isFromUrl &&
-   !(routerObj.pathname.includes("/teams")) &&
-   !(routerObj.pathname.includes("/onboarding"))
-   ){
-     routerObj.push(routerObj.pathname+window.location.hash+ '~ltnmodal', undefined, { shallow: true });
-   }else if(
-   !window.location.hash.includes("~ltnmodal") &&
-   !isFromUrl &&
-   ( (routerObj.pathname.includes("/teams")) ||
-   (routerObj.pathname.includes("/onboarding")) )){
-     routerObj.push(routerObj.asPath.split('#')[0]+window.location.hash+ '~ltnmodal', undefined, { shallow: true });
-   }
+  //  if(!window.location.hash.includes("~ltnmodal") &&
+  /* !isFromUrl &&*/
+  /*  !(routerObj.pathname.includes("/teams")) && */
+    /* !(routerObj.pathname.includes("/onboarding")) */
+  //  ){
+    //  routerObj.push(routerObj.pathname+window.location.hash+ '~ltnmodal', undefined, { shallow: true });
+  //  }else if(
+   /* !window.location.hash.includes("~ltnmodal") &&  */
+   /*!isFromUrl && */
+  //  ( (routerObj.pathname.includes("/teams")) ||
+  //  (routerObj.pathname.includes("/onboarding")) )){
+    //  routerObj.push(routerObj.asPath.split('#')[0]+window.location.hash+ '~ltnmodal', undefined, { shallow: true });
+  //  }
  };
 
 

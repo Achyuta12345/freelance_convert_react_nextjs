@@ -80,7 +80,12 @@ export const latestNewsLetterData = {
         },
       },
     ],
-    landingMedia: [],
+    landingMedia: {
+      id: 1,
+      url: "image.jpg",
+      mimeType: "image/jpeg",
+      size: 1024,
+    },
     featuredMedia: null,
     localizations: [],
   },
@@ -304,7 +309,7 @@ export const blogData = {
         "title": "Blog"
       }
     }],
-    landingMedia: [],
+    landingMedia: {},
     featuredMedia: null,
     localizations: [],
   },

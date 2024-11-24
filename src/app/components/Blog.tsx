@@ -1,8 +1,48 @@
-import { BlogData, Localization, Media } from '@/app/components/HeroScreen';
-import Image from 'next/image'
 import React from 'react'
 
-
+interface Media {
+  id: string;
+  url: string;
+  mimeType: string;
+  size: number;
+}
+ interface Localization {
+  id: number;
+  locale: string;
+  title?: string;
+  slug?: string;
+  published_at?: string;
+  created_at?: string;
+}
+ interface BlogData {
+  status: number;
+  results: {
+    id: number;
+    Title: string;
+    Slug: string;
+    published_at: string;
+    created_at: string;
+    updated_at: string;
+    locale: string;
+    SEOTitle: string | null;
+    SEODescription: string | null;
+    title: string | null;
+    landingTitle: string | null;
+    featuredTitle: string | null;
+    Content: Array<{
+      __typename: string;
+      link: string;
+      navigationSlug: string;
+      modalVideo: {
+        videoURL: string;
+        title: string;
+      };
+    }>;
+    landingMedia: Media | {} | null; // If you have a more specific type for `landingMedia`, replace `any`
+    featuredMedia: unknown | null; // Adjust the type of `featuredMedia` if necessary
+    localizations: Localization[]; // Replace `any` with a more specific type if available
+  };
+}
 interface BlogProps {
   blogData: BlogData;
 }
@@ -18,7 +58,7 @@ const Blog:React.FC<BlogProps> = ({blogData})=>{
   className="w-full h-full object-cover"
   loop
   autoPlay
-  alt="Video"
+  
 />
           </div>
 
