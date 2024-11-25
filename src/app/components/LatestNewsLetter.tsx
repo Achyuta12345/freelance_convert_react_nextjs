@@ -146,11 +146,11 @@ export function LatestNewsLetter({ latestNewsLetterData }: LatestNewsLetterProps
  let items = latestNewsLetterData.results.Content[0].LatestNewsLetter.items;
 let navigationSlug=latestNewsLetterData.results.Content[0].navigationSlug;
 let navSlug = navigationSlug;
-let size ="Medium";
-let colorTheme='white';
-let margin='';
-let layout='';
-let title ='';
+let size ="Padding";
+let colorTheme='Grey';
+let margin='1.2rem';
+let layout='Right';
+let title ='Hello';
  const close = () => {
    setOpen(false);
    let removeModal = window.location.hash.split('~')[0];
@@ -217,9 +217,9 @@ let title ='';
          <div className="w-10/12 top-0 h-screen float-right overflow-scroll bg-black">
            <button
              onClick={close}
-             className="absolute btn-close z-10 right-4 top-4"
+             className="absolute btn-close z-10 right-8 top-4"
            >
-             <img src="/images/misc/close-x.svg" />
+             <img src="/images/close-x.svg" />
            </button>
 
 
@@ -382,7 +382,7 @@ let title ='';
       <Section
         id={navSlug || "newsletterMediaText"}
         className={classNames(
-          "relative overflow-hidden px-4 ",
+          "relative overflow-hidden px-4 col-span-6",
           margin !== "None" && "my-8 md:my-16",
           colorTheme === "Grey" && "bg-dark-grey text-white",
           colorTheme === "Black" && "bg-black text-white ",
