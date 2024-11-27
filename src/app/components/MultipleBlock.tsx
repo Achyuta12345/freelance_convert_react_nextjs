@@ -56,7 +56,7 @@ interface centeredModalData {
 
 
 
- interface LatestNewsLetterData {
+export interface LatestNewsLetterData {
   __typename: string;
   Title: string;
   navigationSlug: string;
@@ -73,7 +73,14 @@ interface centeredModalData {
           content: string;
           homePageImage: {
             __typename: string;
-            data: null | Record<string, unknown>;
+            data: {
+              __typename: string;
+              attributes: {
+                __typename: string;
+                url: string;
+                mime: string;
+              };
+            } | null;
           };
         };
       } | null;
@@ -81,66 +88,30 @@ interface centeredModalData {
   };
 }
 
-
-
 export interface BlogData {
-  status: number;
-  results: {
-    id: number;
-    Title: string;
-    Slug: string;
-    published_at: string;
-    created_at: string;
-    updated_at: string;
-    locale: string;
-    SEOTitle: string | null;
-    SEODescription: string | null;
-    title: string | null;
-    landingTitle: string | null;
-    featuredTitle: string | null;
-    Content: Array<{
-      __typename: string;
-      link: string;
-      navigationSlug: string;
-      modalVideo: {
-        videoURL: string;
-        title: string;
-      };
-    }>;
-    landingMedia: Media | {} | null; // If you have a more specific type for `landingMedia`, replace `any`
-    featuredMedia: unknown | null; // Adjust the type of `featuredMedia` if necessary
-    localizations: Localization[]; // Replace `any` with a more specific type if available
+  __typename: string;
+  link: string;
+  navigationSlug: string;
+  modalVideo: {
+    __typename: string;
+    videoURL: string;
+    title: string;
   };
 }
 export interface videoData {
-  status: number;
-  results: {
-    id: number;
-    Title: string;
-    Slug: string;
-    published_at: string;
-    created_at: string;
-    updated_at: string;
-    locale: string;
-    SEOTitle: string | null;
-    SEODescription: string | null;
-    title: string | null;
-    landingTitle: string | null;
-    featuredTitle: string | null;
-    Content: Array<{
-      __typename: string;
-      link: string;
-      navigationSlug: string;
-      modalVideo: {
-        videoURL: string;
-        title: string;
-      };
-    }>;
-    landingMedia: Media | {} | null; // If you have a more specific type for `landingMedia`, replace `any`
-    featuredMedia: unknown | null; // Adjust the type of `featuredMedia` if necessary
-    localizations: Localization[]; // Replace `any` with a more specific type if available
+  __typename: string;
+  link: string;
+  navigationSlug: string;
+  modalVideo: {
+    __typename: string;
+    videoURL: string;
+    title: string;
   };
 }
+
+
+
+
 
 export const MultipleBlock = (): JSX.Element => {
   // Updated leadership data
@@ -159,18 +130,18 @@ export const MultipleBlock = (): JSX.Element => {
 
       {/* Latest News Letter (2nd-col) Start */}
       
-      {/* <LatestNewsLetter latestNewsLetterData={latestNewsLetterData} /> */}
+      <LatestNewsLetter latestNewsLetterData={latestNewsLetterData} />
      
       {/* Latest News Letter (2nd-col) End */}
 
       {/* 3rd-col Start */}
       <div className="col-span-3 px-8">
         {/* Blog Start */}
-        {/* <Blog blogData={blogData} /> */}
+        <Blog blogData={blogData} />
         {/* Blog End */}
 
         {/* Video Start */}
-        {/* <Video videoData={videoData} /> */}
+        <Video videoData={videoData}  />
         {/* Video End */}
       </div>
       {/* 3rd-col End */}

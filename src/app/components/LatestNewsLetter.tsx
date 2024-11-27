@@ -100,7 +100,7 @@ type ContentItem = {
   LatestNewsLetter: LatestNewsLetter;
 };
 
- interface LatestNewsLetterData {
+interface LatestNewsLetterData {
   __typename: string;
   Title: string;
   navigationSlug: string;
@@ -117,14 +117,20 @@ type ContentItem = {
           content: string;
           homePageImage: {
             __typename: string;
-            data: null | Record<string, unknown>;
+            data: {
+              __typename: string;
+              attributes: {
+                __typename: string;
+                url: string;
+                mime: string;
+              };
+            } | null;
           };
         };
       } | null;
     };
   };
 }
-
 
 interface LatestNewsLetterProps {
   latestNewsLetterData: LatestNewsLetterData;
@@ -135,10 +141,10 @@ interface LatestNewsLetterProps {
 
 export function LatestNewsLetter({ latestNewsLetterData }: LatestNewsLetterProps) {
   const homePageImage =
-    latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.homePageImage.data;
+    latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.homePageImage.data?.attributes.url;
 
   const newsLetterModalContent =
-    latestNewsLetterData.results.Content[0].LatestNewsLetter.newsletter.data.attributes.content;
+  latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.content
  const [isOpen, setOpen] = useState(false);
  const router = useRouter().pathname;
  const routerObj = useRouter();
@@ -147,14 +153,14 @@ export function LatestNewsLetter({ latestNewsLetterData }: LatestNewsLetterProps
  const initModal: ModalType = { title: "", content: "" };
  const [modalProps, setModalProps] = useState(initModal);
 
- let items = latestNewsLetterData.results.Content[0].LatestNewsLetter.items;
-let navigationSlug=latestNewsLetterData.results.Content[0].navigationSlug;
+ let items = [];
+let navigationSlug=latestNewsLetterData.navigationSlug;
 let navSlug = navigationSlug;
 let size ="Padding";
 let colorTheme='Grey';
-let margin='1.2rem';
+let margin='None';
 let layout='Right';
-let title ='Hello';
+let title =latestNewsLetterData.Title;
  const close = () => {
    setOpen(false);
    let removeModal = window.location.hash.split('~')[0];
@@ -268,144 +274,35 @@ let title ='Hello';
    );
  }
  
- let filterItems
- if (items && items.length > 0) {
-  filterItems
- = items.map((item: any, i: number) => {
-    // Ensure the item is treated as a NewsletterItem after lowercaseKeys
-    item = lowercaseKeys(item) as unknown as NewsletterItem; // Cast to NewsletterItem
-  
-    const {
-      media,
-      title,
-      text,
-      link,
-      layout,
-      size,
-      margin,
-      displaySeperator,
-      navSlug,
-      colorTheme,
-      modal,
-    } = item;
-  
-    return (
-      <>
-        {size === "Medium" && <div className="hr" />}
-        <Section
-          id={navSlug || "newsletterMediaText"}
-          className={classNames(
-            "relative overflow-hidden",
-            margin !== "None" && "my-8 md:my-16",
-            colorTheme === "Grey" && "bg-dark-grey text-white",
-            colorTheme === "Black" && "bg-black text-white",
-            colorTheme === "Blur" && "bg-black text-white",
-            size === "Padding" && "md:px-6"
-          )}
-        >
-          <legend style={{ visibility: "hidden" }}>{navigationSlug}</legend>
-          <div
-            className={classNames(
-              "flex flex-wrap items-center mx-auto",
-              size === "Medium" && "max-w-md px-4 md:px-6"
-            )}
-          >
-            {colorTheme === "Blur" && "bg-black text-white" && (
-              <File
-                className="hidden md:block h-full w-full filter blur-lg opacity-50 absolute top-0 left-0 object-top  transform-gpu object-cover scale-max"
-                {...media?.data?.attributes}
-              />
-            )}
-  
-            <div
-              className={classNames(
-                "relative mb-8 md:mb-0",
-                size === "Medium" ? "w-full md:w-7/12" : "w-full md:w-6/12",
-                size === "Padding" && "py-0",
-                layout === "Right" && "mb-8 md:mb-0"
-              )}
-            >
-              {homePageImage && homePageImage && <File url={homePageImage} alt=""  />}
-            </div>
-  
-            <div
-              className={classNames(
-                "relative max-w-sm ",
-                layout === "Right" ? "md:order-first md:pr-16" : "md:pl-16",
-                size === "Medium" ? "md:w-5/12" : "md:w-6/12",
-                size === "Padding" && "px-4 pb-12  md:pb-0",
-                size === "Full" && "px-4 pb-12 pt-12 md:pb-12",
-                size !== "Medium" && "max-w-titles",
-                layout !== "Right" && size !== "Medium" && "md:pr-16"
-              )}
-            >
-              {title && <h2>{title}</h2>}
-              {text && <RichText text={text} />}
-              {link && (
-                <div className="inline-block">
-                  <a
-                    href={link.URL}
-                    target="blank"
-                    className="button-dark transition-opacity button-dark duration-300 block hover:opacity-50 w-full text-left"
-                  >
-                    {link.Title}
-                  </a>
-                </div>
-              )}
-              {modal && (
-                <div className="inline-block">
-                  <button
-                    onClick={() => open(modal)}
-                    className="transition-opacity button-dark duration-300 block hover:opacity-50 w-full text-left"
-                  >
-                    <span className="lato text-sm leading-none">{modal.Title}</span>
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        </Section>
-      </>
-    );
-  });
-  
-  };
-
-  // return (
-  //   <Section className="">
-  //     <legend style={{ visibility: "hidden" }}>{navigationSlug}</legend>
-  //     {filterItems && (
-  //       <ArrowCarousel slidesPerView={1} items={filterItems} colorTheme="White" />
-  //     )}
-  //     {isOpen && <ModalWindow {...modalProps} />}
-  //   </Section>
-  // );
+ 
   return (
     <>
       {size === "Medium" && <div className=" hr" />}
       <Section
         id={navSlug || "newsletterMediaText"}
         className={classNames(
-          "relative overflow-hidden px-4 col-span-6",
-          margin !== "None" && "my-8 md:my-16",
-          colorTheme === "Grey" && "bg-dark-grey text-white",
+          "relative overflow-hidden  col-span-6 ",
+          margin !== "None" && "my-0 md:my-0",
+          colorTheme === "Grey" && "text-white",
           colorTheme === "Black" && "bg-black text-white ",
           colorTheme === "Blur" && "bg-black text-white",
-          size === "Padding" && "md:px-6"
+          size === "Padding" && "",
+          "border-l border-r border-gray-200"
         )}
       >
-        <legend style={{visibility:"hidden"}}>{navigationSlug}</legend>
+        {/* <legend style={{visibility:"hidden"}}>{navigationSlug}</legend> */}
         <div
           className={classNames(
-            "flex flex-wrap items-center mx-auto",
+            "flex flex-wrap items-center ",
             size === "Medium" && "max-w-md px-4 md:px-6"
           )}
         >
           {colorTheme === "Blur" && "bg-black text-white" && (
             <File
               className="hidden md:block h-full w-full filter blur-lg opacity-50 absolute top-0 left-0 object-top  transform-gpu object-cover scale-max"
-              {...latestNewsLetterData.results.Content[0].LatestNewsLetter.newsletter.data.attributes.homePageImage.data.attributes}
+              {...latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.homePageImage.data?.attributes}
               alt=""
+              url=""
             />
           )}
  
@@ -414,15 +311,16 @@ let title ='Hello';
             className={classNames(
               "relative mb-8 md:mb-0",
               size === "Medium" ? "w-full md:w-7/12" : "w-full md:w-full",
-              size === "Padding" && "py-0",
+              size === "Padding" && "py-0 h-1/3",
               layout === "Right"
-                ? "md:order-first md:pr-16"
+                ? "md:order-first md:px-8"
                 : layout === "Left"
                 ? ""
-                : "pl-12"
+                : "pl-12",
+                
             )}
           >
-            {latestNewsLetterData.results.Content[0].LatestNewsLetter.newsletter.data.attributes.homePageImage.data.attributes && latestNewsLetterData.results.Content[0].LatestNewsLetter.newsletter.data.attributes.homePageImage.data && <File alt=""{...latestNewsLetterData.results.Content[0].LatestNewsLetter.newsletter.data.attributes.homePageImage.data.attributes} /> }
+            {latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.homePageImage.data?.attributes && latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.homePageImage.data && <File alt=""{...latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.homePageImage.data?.attributes} /> }
           </div>
  
  
@@ -443,24 +341,26 @@ let title ='Hello';
           >
             {title && (
               <h2
-                className={`${router.includes("/teams") ? `teams-title1` : ""}`}
+                className={`${router.includes("/teams") ? `teams-title1` : "px-4 py-8 text-black  text-xl"}`}
               >
                 {title}
               </h2>
             )}
-            <p className="styleRichtext">{latestNewsLetterData.results.Content[0].LatestNewsLetter.newsletter.data.attributes.subjectLine && <RichText text={latestNewsLetterData.results.Content[0].LatestNewsLetter.newsletter.data.attributes.subjectLine} />}</p>
+            
+
+            <p className="styleRichtext text-black pb-4 px-4">{latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.subjectLine && <RichText text={latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.subjectLine} />}</p>
             {(
               <div className="inline-block">
                 <button
                   // onClick={() => open( latestNewsLetterData.results.Content[0].LatestNewsLetter.newsletter.data.attributes.content)}
                   onClick={() => 
                     open({
-                      title: latestNewsLetterData.results.Content[0].LatestNewsLetter.newsletter.data.attributes.title || "Default Title",
-                      content: latestNewsLetterData.results.Content[0].LatestNewsLetter.newsletter.data.attributes.content,
+                      title: latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.title || "Default Title",
+                      content: latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.content ?? 'Default content',
                     })
                   }
                   
-                  className="button-dark transition-opacity bg-black duration-300 block hover:opacity-50 "
+                  className="button-dark mx-4 p-1 transition-opacity bg-black duration-300 block hover:opacity-50 "
                 >
                   {"Read The Latest Newsletter"}
                 </button>

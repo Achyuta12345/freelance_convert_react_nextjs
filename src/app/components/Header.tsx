@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({ initialUrl = '', imageUrl, descriptionU
   };
 
   return (
-    <div className="flex items-center justify-between border-t border-b py-4 px-6 border-t-2 border-b-2">
+    <div className="flex items-center justify-between border-t border-b py-4 px-6 border-t-2 border-b-2 mb-20">
       <div className="flex items-center">
         <img
           alt="Black and white portrait of a person with a hood"

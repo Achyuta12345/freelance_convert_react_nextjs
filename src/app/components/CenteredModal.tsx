@@ -146,7 +146,7 @@ const handleItemClickInModal = (
    <Section
     //  id={centeredModalData.results.Content?.navigationSlug || "centeredModal"}
      id={centeredModalData.navigationSlug || "centeredModal"}
-    //  className={className(centeredModalData.results.Content[0]?.colorTheme === "Black" && "bg-black text-white")}
+    //  className={className(centeredModalData?.colorTheme === "Black" && "bg-black text-white")}
     className=""
    >
      <legend style={{visibility:"hidden"}}>{centeredModalData.navigationSlug}</legend>

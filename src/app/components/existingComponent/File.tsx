@@ -8,7 +8,7 @@ export interface FileProps extends ImgHTMLAttributes<HTMLImageElement> {
 
 export const File: React.FC<FileProps> = ({ url, alt, ...props }) => (
   <a href={url} target="_blank" rel="noopener noreferrer">
-    <img src={url} alt={alt} {...props} />
+    <img style={{ height: "700px" }} src={url} alt={alt} {...props} />
   </a>
 );
 
