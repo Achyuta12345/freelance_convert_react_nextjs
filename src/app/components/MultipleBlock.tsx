@@ -32,41 +32,25 @@ export interface Localization {
 }
 
 interface centeredModalData {
-  status: number;
-  results: {
-    id: number;
-    Title: string;
-    Slug: string;
-    published_at: string;
-    created_at: string;
-    updated_at: string;
-    locale: string;
-    SEOTitle: string | null;
-    SEODescription: string | null;
-    title: string | null;
-    landingTitle: string | null;
-    featuredTitle: string | null;
-    Content: Array<{
-      __typename: string;
-      colorTheme: string;
-      title: string;
-      subtitle: string;
-      navigationSlug: string;
-      items: Array<{
-        id: string;
-        title: string;
-        publishedDate: string;
-        modalContent: {
-          Text: string;
-          modalTitle: string | null;
-          media?: { data: { attributes: string } };
+  _typename: string; // Component type identifier
+  title: string | null; // Main title of the modal, nullable
+  subtitle: string | null; // Subtitle of the modal, nullable
+  navigationSlug: string | null; // Slug for navigation, nullable
+  items: Array<{
+    __typename: string; // Component type identifier for items
+    id: string; // Unique identifier for the item
+    title: string | null; // Item title, nullable
+    publishedDate: string | null; // Date the item was published, nullable
+    modalContent: {
+      text?: string; // Text content of the modal, optional
+      modalTitle?: string | null; // Title of the modal, optional and nullable
+      media?: { 
+        data: { 
+          attributes: string; // Media attributes, e.g., URL or metadata
         };
-      }>;
-    }>;
-    landingMedia: unknown[]; // Adjust as needed
-    featuredMedia: unknown | null;
-    localizations: unknown[]; // Adjust as needed
-  };
+      }; // Optional media field
+    } | null; // Modal content can be null
+  }>;
 }
 
 
@@ -194,7 +178,7 @@ export interface videoData {
   };
 }
 
-export const HeroScreen = (): JSX.Element => {
+export const MultipleBlock = (): JSX.Element => {
   // Updated leadership data
   
 

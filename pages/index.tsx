@@ -1,7 +1,7 @@
 // pages/index.tsx
 
 import Header from '@/app/components/Header';
-import { HeroScreen } from '@/app/components/HeroScreen';
+import { MultipleBlock } from '@/app/components/MultipleBlock';
 import TechHubTutorial from '@/app/components/TechHubTutorial';
 import React from 'react';
 export interface HeaderProps {
@@ -23,7 +23,7 @@ const Home: React.FC = () => {
         imageUrl="https://storage.googleapis.com/a1aa/image/81CneFLIj42XTiMv50D3fi6M9hA8NRI7MHASK1RfKz3KLeRPB.jpg"
         descriptionUrl="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque pellentesque
           libero"/>
-   <HeroScreen/>
+   <MultipleBlock/>
    <TechHubTutorial imageUrl="https://storage.googleapis.com/a1aa/image/FcodR1ftfjqwX0aJ6lYfpy8SeeRv8S9e13ImDjlRHxb7pQI9E.jpg" title="Mater The Tech Hub With This Tutorial" tutorialUrl="https://www.youtube.com/@freecodecamp"/>
    </>   
   );

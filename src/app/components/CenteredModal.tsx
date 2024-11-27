@@ -10,50 +10,27 @@ import { format,parseISO } from "date-fns";
 // import { useRouter } from 'next/router';
 
 
- 
-interface Media {
-  id: string;
-  url: string;
-  mimeType: string;
-  size: number;
-}
 
 interface centeredModalData {
-  status: number;
-  results: {
-    id: number;
-    Title: string;
-    Slug: string;
-    published_at: string;
-    created_at: string;
-    updated_at: string;
-    locale: string;
-    SEOTitle: string | null;
-    SEODescription: string | null;
-    title: string | null;
-    landingTitle: string | null;
-    featuredTitle: string | null;
-    Content: Array<{
-      __typename: string;
-      colorTheme: string;
-      title: string;
-      subtitle: string;
-      navigationSlug: string;
-      items: Array<{
-        id: string;
-        title: string;
-        publishedDate: string;
-        modalContent: {
-          Text: string;
-          modalTitle: string | null;
-          media?: { data: { attributes: string } };
+  _typename: string; // Component type identifier
+  title: string | null; // Main title of the modal, nullable
+  subtitle: string | null; // Subtitle of the modal, nullable
+  navigationSlug: string | null; // Slug for navigation, nullable
+  items: Array<{
+    __typename: string; // Component type identifier for items
+    id: string; // Unique identifier for the item
+    title: string | null; // Item title, nullable
+    publishedDate: string | null; // Date the item was published, nullable
+    modalContent: {
+      text?: string; // Text content of the modal, optional
+      modalTitle?: string | null; // Title of the modal, optional and nullable
+      media?: { 
+        data: { 
+          attributes: string; // Media attributes, e.g., URL or metadata
         };
-      }>;
-    }>;
-    landingMedia: unknown[]; // Adjust as needed
-    featuredMedia: unknown | null;
-    localizations: unknown[]; // Adjust as needed
-  };
+      }; // Optional media field
+    } | null; // Modal content can be null
+  }>;
 }
 
 
@@ -144,9 +121,9 @@ const handleItemClickInModal = (
    const [currentPage, setCurrentPage] = useState(1);
    const itemsPerPage = 10;
    // Calculate the number of pages
-   const totalPages = centeredModalData.results.Content[0].items && Math.ceil(centeredModalData.results.Content[0].items.length / itemsPerPage);
+   const totalPages = centeredModalData.items && Math.ceil(centeredModalData.items.length / itemsPerPage);
    // Get the items to be displayed on the current page
-   const currentItems = centeredModalData.results.Content[0]?.items && centeredModalData.results.Content[0].items.slice(
+   const currentItems = centeredModalData.items && centeredModalData.items.slice(
      (currentPage - 1) * itemsPerPage,
      currentPage * itemsPerPage
    );
@@ -168,28 +145,28 @@ const handleItemClickInModal = (
  return (
    <Section
     //  id={centeredModalData.results.Content?.navigationSlug || "centeredModal"}
-     id={centeredModalData.results.Content[0]?.navigationSlug || "centeredModal"}
+     id={centeredModalData.navigationSlug || "centeredModal"}
     //  className={className(centeredModalData.results.Content[0]?.colorTheme === "Black" && "bg-black text-white")}
     className=""
    >
-     <legend style={{visibility:"hidden"}}>{centeredModalData.results.Content[0]?.navigationSlug}</legend>
-     {centeredModalData.results.Content[0]?.title && (
+     <legend style={{visibility:"hidden"}}>{centeredModalData.navigationSlug}</legend>
+     {centeredModalData.title && (
        <div className=" py-1 px-2 md:px-2 ">
-         {centeredModalData.results.Content[0]?.title && (
-           <span className="border-b-2 border-black font-semibold py-1 ml-6 ">{centeredModalData.results.Content[0]?.title}</span>
+         {centeredModalData.title && (
+           <span className="border-b-2 border-black font-semibold py-1 ml-6 ">{centeredModalData.title}</span>
           
           
          )}
-         {centeredModalData.results.Content[0]?.subtitle && (
-           <p className="ProximaNova-font technology-update-sublititle font-bold text-base text-[#131313] mt-6 px-6">{centeredModalData.results.Content[0]?.subtitle} </p>
+         {centeredModalData.subtitle && (
+           <p className="ProximaNova-font technology-update-sublititle font-bold text-base text-[#131313] mt-6 px-6">{centeredModalData.subtitle} </p>
          )}
 
 
          <Modal
            isOpen={isOpen}
            close={close}
-           presenceKey={centeredModalData.results.Content[0]?.title}
-           ariaLabel={centeredModalData.results.Content[0]?.title || ""}
+           presenceKey={centeredModalData.title}
+           ariaLabel={centeredModalData.title || ""}
            className="justify-end"
          >
            <section
@@ -239,8 +216,8 @@ const handleItemClickInModal = (
                        "mb-8 md:mb-0"
                      )}
                    >
-                     {centeredModalData.results.Content[0]?.items &&
-                       centeredModalData.results.Content[0]?.items.find((item : any)=> {
+                     {centeredModalData.items &&
+                       centeredModalData.items.find((item : any)=> {
                                        
                        return item.id == i
 
@@ -256,9 +233,9 @@ const handleItemClickInModal = (
                    </div>
                  </div>
                  <p className="text-sm">
-                   {centeredModalData.results.Content[0]?.items &&
-                    centeredModalData.results.Content[0]?.items.find((item : any)=> item?.id == i)?.modalContent?.Text && (
-                       <RichText text={centeredModalData.results.Content[0]?.items.find((item : any)=> item.id == i)?.modalContent?.Text || ""} />
+                   {centeredModalData.items &&
+                    centeredModalData.items.find((item : any)=> item?.id == i)?.modalContent?.text && (
+                       <RichText text={centeredModalData.items.find((item : any)=> item.id == i)?.modalContent?.text || ""} />
                      )}
                  </p>
                </div>
@@ -277,7 +254,7 @@ const handleItemClickInModal = (
                            <div className="flex-auto px-10 items-start">
                              <p
                                className="manrope-semibold cursor-pointer"
-                               onClick={() => handleItemClickInModal(i,item.modalContent?.modalTitle, item)}
+                               onClick={() => handleItemClickInModal(i,item.modalContent?.modalTitle??null, item)}
                              >
                                <span className="manrope-semibold pr-10 dateField">
                                  {item &&
@@ -335,7 +312,7 @@ const handleItemClickInModal = (
 
 
          <div className="px-6 py-4">
- {centeredModalData.results.Content[0]?.items && centeredModalData.results.Content[0]?.items.slice(0, 4).map((item, i) => {
+ {centeredModalData.items && centeredModalData.items.slice(0, 4).map((item, i) => {
    let formattedDate = ""; // Define formattedDate here
   
    if (item && item.publishedDate) {
@@ -351,7 +328,7 @@ const handleItemClickInModal = (
          </span>
          <p
            className="cursor-pointer text-black ProximaNova-font tech-updates-titles font-extrabold text-lg leading-snug mt-1"
-           onClick={() => handleItemClick(i, item.modalContent?.modalTitle, false, item)}
+           onClick={() => handleItemClick(i, item.modalContent?.modalTitle ?? null, false, item)}
          >
            {item.title}
          </p>

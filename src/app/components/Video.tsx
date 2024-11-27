@@ -1,4 +1,4 @@
-import { videoData } from '@/app/components/HeroScreen';
+import { videoData } from '@/app/components/MultipleBlock';
 import Image from 'next/image'
 import React from 'react'
 
