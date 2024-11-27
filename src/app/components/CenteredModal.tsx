@@ -327,7 +327,7 @@ const handleItemClickInModal = (
            {formattedDate}
          </span>
          <p
-           className="cursor-pointer text-black ProximaNova-font tech-updates-titles font-extrabold text-lg leading-snug mt-1"
+           className="cursor-pointer text-black ProximaNova-font tech-updates-titles   leading-snug mt-1"
            onClick={() => handleItemClick(i, item.modalContent?.modalTitle ?? null, false, item)}
          >
            {item.title}

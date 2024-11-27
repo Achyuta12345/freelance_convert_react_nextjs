@@ -100,27 +100,31 @@ type ContentItem = {
   LatestNewsLetter: LatestNewsLetter;
 };
 
-type LatestNewsLetterData = {
-  status: number;
-  results: {
-    id: number;
-    Title: string;
-    Slug: string;
-    published_at: string;
-    created_at: string;
-    updated_at: string;
-    locale: string;
-    SEOTitle: string | null;
-    SEODescription: string | null;
-    title: string | null;
-    landingTitle: string | null;
-    featuredTitle: string | null;
-    Content: ContentItem[];
-    landingMedia: Media;
-    featuredMedia: Media | null;
-    localizations: any[];
+ interface LatestNewsLetterData {
+  __typename: string;
+  Title: string;
+  navigationSlug: string;
+  LatestNewsLetter: {
+    __typename: string;
+    newsletter: {
+      __typename: string;
+      data: {
+        __typename: string;
+        attributes: {
+          __typename: string;
+          title: string;
+          subjectLine: string;
+          content: string;
+          homePageImage: {
+            __typename: string;
+            data: null | Record<string, unknown>;
+          };
+        };
+      } | null;
+    };
   };
-};
+}
+
 
 interface LatestNewsLetterProps {
   latestNewsLetterData: LatestNewsLetterData;
@@ -131,7 +135,7 @@ interface LatestNewsLetterProps {
 
 export function LatestNewsLetter({ latestNewsLetterData }: LatestNewsLetterProps) {
   const homePageImage =
-    latestNewsLetterData.results.Content[0].LatestNewsLetter.newsletter.data.attributes.homePageImage.data.attributes.url;
+    latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.homePageImage.data;
 
   const newsLetterModalContent =
     latestNewsLetterData.results.Content[0].LatestNewsLetter.newsletter.data.attributes.content;

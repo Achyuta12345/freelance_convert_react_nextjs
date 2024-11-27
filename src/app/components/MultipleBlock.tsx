@@ -56,67 +56,31 @@ interface centeredModalData {
 
 
 
-export interface LatestNewsLetterData {
-  status: number;
-  results: {
-    id: number;
-    Title: string;
-    Slug: string;
-    published_at: string;
-    created_at: string;
-    updated_at: string;
-    locale: string;
-    SEOTitle: string | null;
-    SEODescription: string | null;
-    title: string | null;
-    landingTitle: string | null;
-    featuredTitle: string | null;
-    Content: Array<{
-      Title: string;
-      description: string;
-      navigationSlug: string;
-      LatestNewsLetter: {
-        newsletter: {
-          data: {
-            attributes: {
-              title: string;
-              subjectLine: string | null;
-              content: string;
-              homePageImage: {
-                data: {
-                  attributes: {
-                    url: string;
-                    mime: string;
-                  };
-                };
-              };
-            };
+ interface LatestNewsLetterData {
+  __typename: string;
+  Title: string;
+  navigationSlug: string;
+  LatestNewsLetter: {
+    __typename: string;
+    newsletter: {
+      __typename: string;
+      data: {
+        __typename: string;
+        attributes: {
+          __typename: string;
+          title: string;
+          subjectLine: string;
+          content: string;
+          homePageImage: {
+            __typename: string;
+            data: null | Record<string, unknown>;
           };
         };
-        items: Array<{
-          id: string;
-          media: string;
-          title: string;
-          text: string;
-          link: string;
-          layout: string;
-          size: string;
-          margin: string;
-          displaySeperator: boolean;
-          navSlug: string;
-          colorTheme: string;
-          modal: {
-            title: string;
-            content: string;
-          };
-        }>;
-      };
-    }>;
-    landingMedia: Media; // Adjust based on `landingMedia` structure
-    featuredMedia: unknown | null; // Replace `unknown` with the appropriate type if available
-    localizations: Localization; // Adjust based on the structure of `localizations`
+      } | null;
+    };
   };
 }
+
 
 
 export interface BlogData {
@@ -195,18 +159,18 @@ export const MultipleBlock = (): JSX.Element => {
 
       {/* Latest News Letter (2nd-col) Start */}
       
-      <LatestNewsLetter latestNewsLetterData={latestNewsLetterData} />
+      {/* <LatestNewsLetter latestNewsLetterData={latestNewsLetterData} /> */}
      
       {/* Latest News Letter (2nd-col) End */}
 
       {/* 3rd-col Start */}
       <div className="col-span-3 px-8">
         {/* Blog Start */}
-        <Blog blogData={blogData} />
+        {/* <Blog blogData={blogData} /> */}
         {/* Blog End */}
 
         {/* Video Start */}
-        <Video videoData={videoData} />
+        {/* <Video videoData={videoData} /> */}
         {/* Video End */}
       </div>
       {/* 3rd-col End */}
