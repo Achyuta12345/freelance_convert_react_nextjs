@@ -1,6 +1,4 @@
-// components/File.tsx
 import React, { ImgHTMLAttributes } from "react";
-
 export interface FileProps extends ImgHTMLAttributes<HTMLImageElement> {
   url: string;
   alt: string;
@@ -8,7 +6,11 @@ export interface FileProps extends ImgHTMLAttributes<HTMLImageElement> {
 
 export const File: React.FC<FileProps> = ({ url, alt, ...props }) => (
   <a href={url} target="_blank" rel="noopener noreferrer">
-    <img style={{ height: "700px" }} src={url} alt={alt} {...props} />
+    <img
+      style={{  width: "550x" }}
+      src={url}
+      alt={alt || "Image"}
+      {...props}
+    />
   </a>
 );
-

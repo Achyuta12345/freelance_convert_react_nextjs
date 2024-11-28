@@ -307,21 +307,28 @@ let title =latestNewsLetterData.Title;
           )}
  
  
-          <div
-            className={classNames(
-              "relative mb-8 md:mb-0",
-              size === "Medium" ? "w-full md:w-7/12" : "w-full md:w-full",
-              size === "Padding" && "py-0 h-1/3",
-              layout === "Right"
-                ? "md:order-first md:px-8"
-                : layout === "Left"
-                ? ""
-                : "pl-12",
-                
-            )}
-          >
-            {latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.homePageImage.data?.attributes && latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.homePageImage.data && <File alt=""{...latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.homePageImage.data?.attributes} /> }
-          </div>
+ <div
+  className={classNames(
+    "relative mb-8 md:mb-0",
+    size === "Medium" ? "w-full md:w-7/12" : "w-full md:w-full",
+    size === "Padding" && "py-0 h-1/3",
+    layout === "Right"
+      ? "md:order-first md:px-8"
+      : layout === "Left"
+      ? ""
+      : "pl-12",
+  )}
+>
+  {latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.homePageImage.data?.attributes && 
+    latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.homePageImage.data && (
+      <File 
+        url={latestNewsLetterData.LatestNewsLetter.newsletter.data.attributes.homePageImage.data.attributes.url}
+        alt="Image"
+      />
+    )
+  }
+</div>
+
  
  
           <div
@@ -348,8 +355,8 @@ let title =latestNewsLetterData.Title;
             )}
             
 
-            <p className="styleRichtext text-black pb-4 px-4">{latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.subjectLine && <RichText text={latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.subjectLine} />}</p>
-            {(
+            {/* <p className="styleRichtext text-black pb-4 px-4">{latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.subjectLine && <RichText text={latestNewsLetterData.LatestNewsLetter.newsletter.data?.attributes.subjectLine} />}</p> */}
+            {/* {(
               <div className="inline-block">
                 <button
                   // onClick={() => open( latestNewsLetterData.results.Content[0].LatestNewsLetter.newsletter.data.attributes.content)}
@@ -365,7 +372,7 @@ let title =latestNewsLetterData.Title;
                   {"Read The Latest Newsletter"}
                 </button>
               </div>
-            )}
+            )} */}
             {isOpen && <ModalWindow {...modalProps} />}
           </div>
         </div>

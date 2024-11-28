@@ -92,9 +92,9 @@ export interface BlogData {
   __typename: string;
   link: string;
   navigationSlug: string;
-  modalVideo: {
+  modalImage: {
     __typename: string;
-    videoURL: string;
+    imageURL: string;
     title: string;
   };
 }

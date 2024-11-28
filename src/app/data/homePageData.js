@@ -299,9 +299,9 @@ export const blogData = {
     "__typename": "ComponentCnTechHubConceptualVideo",
     "link": "https://strapi-bus-eng-prod.s3.amazonaws.com/We_Are_Conde_Nast_Technology_df42119ec9_158d1212f1.mp4",
     "navigationSlug": "homepage-conceptual-vedio",
-    "modalVideo": {
+    "modalImage": {
         "__typename": "ComponentCnTechHubModalVideo",
-        "videoURL": "https://strapi-bus-eng-prod.s3.amazonaws.com/We_Are_Conde_Nast_Technology_df42119ec9_158d1212f1.mp4",
+        "imageURL": "https://strapi-bus-eng.s3.us-east-1.amazonaws.com/hub_newsletter_1_b5ec27a0ee.png",
         "title": "Condé Nast Technology"
     }
 };
