@@ -1,47 +1,47 @@
 import React from 'react';
 
 // Define the type for the TechnologyTuneData prop
-interface TechnologyTuneProps {
-  TechnologyTuneData: {
-    status: number;
-    results: {
-      id: number;
-      Title: string;
-      Slug: string;
-      published_at: string;
-      created_at: string;
-      updated_at: string;
-      locale: string;
-      SEOTitle: null | string;
-      SEODescription: null | string;
-      localizations: never[];
-      Content?: {
-        items: {
-          playlistUrl: JSX.Element;
-          noteText: string;
-        }[];
-      }[];
-    };
-  };
+interface Podcast {
+  __typename: string; // GraphQL typename for the podcast item
+  playlistUrl: string; // HTML embed code as a string
+  noteText: string | null; // Optional note text
 }
 
+interface TechnologyTuneData {
+  __typename: string; // GraphQL typename for the main component
+  Title: string; // Title of the section
+  Text: string; // HTML text content
+  navigationSlug: string; // Navigation slug
+  colorTheme: string; // Color theme
+  Podcasts: Podcast[]; // Array of podcast objects
+}
+
+interface TechnologyTuneProps {
+  TechnologyTuneData: TechnologyTuneData; // Props for the component
+}
 
 const TechnologyTune: React.FC<TechnologyTuneProps> = ({ TechnologyTuneData }) => {
-  const { results } = TechnologyTuneData;
-  const content = results.Content?.[0];
-  const firstItem = content?.items?.[0];
+  const { Podcasts } = TechnologyTuneData;
+  const firstItem = Podcasts[0];
+  
 
   const MusicPlayer = () => {
-    if (firstItem?.playlistUrl && React.isValidElement(firstItem.playlistUrl)) {
-      return firstItem.playlistUrl;
+    if (firstItem?.playlistUrl) {
+      return (
+        <div
+          className="playlist-container"
+          dangerouslySetInnerHTML={{ __html: firstItem.playlistUrl }}
+        />
+      );
     }
     return <div>No Playlist Available</div>;
   };
+  
 
   return (
     <div className="p-4 ">
       <MusicPlayer />
-      <h2 className="text-xl font-semibold py-4">Technology Tunes</h2>
+      <h2 className="text-xl font-semibold py-4">{TechnologyTuneData.Title}</h2>
       <p className="text-md pb-4">
         {firstItem?.noteText || 'No notes available for this tune.'}
       </p>

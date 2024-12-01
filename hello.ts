@@ -1,4 +1,4 @@
-{
+let data={
     "data": {
         "cnTechPages": {
             "__typename": "CnTechPageEntityResponseCollection",
@@ -560,4 +560,130 @@
         }
     }
 }
+
+let data2 = {
+    "__typename": "ComponentCnTechHubCombinedBlock",
+    "podcasts": [
+        {
+            "__typename": "ComponentCnTechHubPodcasts",
+            "Title": "Technology Tunes",
+            "Text": "<p>Here's what Technology is listening to lately.</p>",
+            "navigationSlug": "homepage-technology-songs",
+            "colorTheme": "Blue",
+            "Podcasts": [
+                {
+                    "__typename": "ComponentCnTechHubPlaylists",
+                    "playlistUrl": "<iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/playlist/6bOKVksEjh99hsbjUx8mEH?utm_source=generator&theme=0\" width=\"100%\" height=\"352\" frameBorder=\"0\" allowfullscreen=\"\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>",
+                    "noteText": null
+                }
+            ]
+        }
+    ],
+    "techTopRecs": [
+        {
+            "__typename": "ComponentCnTechHubBlockContentFeedCarousel",
+            "Title": "Tech’s Top Recs",
+            "Text": null,
+            "text_Spacing": null,
+            "blockSize": "Quarter",
+            "navSlug": null,
+            "navTitle": null,
+            "colorTheme": null,
+            "navigationSlug": null,
+            "Blocks": [
+                {
+                    "__typename": "ComponentCnComponentsBlocks",
+                    "id": "565",
+                    "Text": null,
+                    "mediaURL": null,
+                    "Title": "tech top recs 1st",
+                    "Media": {
+                        "__typename": "UploadFileEntityResponse",
+                        "data": {
+                            "__typename": "UploadFileEntity",
+                            "attributes": {
+                                "__typename": "UploadFile",
+                                "url": "https://strapi-bus-eng-prod.s3.us-east-1.amazonaws.com/Component_4_1_58dbecaf1d.png",
+                                "mime": "image/png"
+                            }
+                        }
+                    }
+                },
+                {
+                    "__typename": "ComponentCnComponentsBlocks",
+                    "id": "566",
+                    "Text": null,
+                    "mediaURL": null,
+                    "Title": null,
+                    "Media": {
+                        "__typename": "UploadFileEntityResponse",
+                        "data": {
+                            "__typename": "UploadFileEntity",
+                            "attributes": {
+                                "__typename": "UploadFile",
+                                "url": "https://strapi-bus-eng-prod.s3.us-east-1.amazonaws.com/Component_4_1_58dbecaf1d.png",
+                                "mime": "image/png"
+                            }
+                        }
+                    }
+                },
+                {
+                    "__typename": "ComponentCnComponentsBlocks",
+                    "id": "572",
+                    "Text": null,
+                    "mediaURL": null,
+                    "Title": null,
+                    "Media": {
+                        "__typename": "UploadFileEntityResponse",
+                        "data": {
+                            "__typename": "UploadFileEntity",
+                            "attributes": {
+                                "__typename": "UploadFile",
+                                "url": "https://strapi-bus-eng-prod.s3.us-east-1.amazonaws.com/Component_4_1_58dbecaf1d.png",
+                                "mime": "image/png"
+                            }
+                        }
+                    }
+                },
+                {
+                    "__typename": "ComponentCnComponentsBlocks",
+                    "id": "573",
+                    "Text": null,
+                    "mediaURL": null,
+                    "Title": null,
+                    "Media": {
+                        "__typename": "UploadFileEntityResponse",
+                        "data": {
+                            "__typename": "UploadFileEntity",
+                            "attributes": {
+                                "__typename": "UploadFile",
+                                "url": "https://strapi-bus-eng-prod.s3.us-east-1.amazonaws.com/Component_4_1_58dbecaf1d.png",
+                                "mime": "image/png"
+                            }
+                        }
+                    }
+                },
+                {
+                    "__typename": "ComponentCnComponentsBlocks",
+                    "id": "574",
+                    "Text": null,
+                    "mediaURL": null,
+                    "Title": null,
+                    "Media": {
+                        "__typename": "UploadFileEntityResponse",
+                        "data": {
+                            "__typename": "UploadFileEntity",
+                            "attributes": {
+                                "__typename": "UploadFile",
+                                "url": "https://strapi-bus-eng-prod.s3.us-east-1.amazonaws.com/Component_4_1_58dbecaf1d.png",
+                                "mime": "image/png"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
+
 

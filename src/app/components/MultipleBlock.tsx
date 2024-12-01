@@ -15,12 +15,7 @@ import { TechTopRecData } from "../data/homePageData";
 import Tech from "./Tech";
 // Define the updated type for the leadership update data
 
-interface Media {
-  id: string;
-  url: string;
-  mimeType: string;
-  size: number;
-}
+
 
 export interface Localization {
   id: number;
@@ -54,7 +49,20 @@ interface centeredModalData {
 }
 
 
+interface Podcast {
+  __typename: string; // GraphQL typename for the podcast item
+  playlistUrl: string; // HTML embed code as a string
+  noteText: string | null; // Optional note text
+}
 
+interface TechnologyTuneData {
+  __typename: string; // GraphQL typename for the main component
+  Title: string; // Title of the section
+  Text: string; // HTML text content
+  navigationSlug: string; // Navigation slug
+  colorTheme: string; // Color theme
+  Podcasts: Podcast[]; // Array of podcast objects
+}
 
 export interface LatestNewsLetterData {
   __typename: string;

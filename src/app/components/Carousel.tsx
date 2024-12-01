@@ -1,59 +1,53 @@
 import Image from "next/image";
 import React, { useState } from "react";
 
-interface TechTopRecDataType {
-  status: number;
-  results: {
-    id: number;
-    Title: string;
-    Slug: string;
-    published_at: string;
-    created_at: string;
-    updated_at: string;
-    locale: string;
-    SEOTitle: string | null;
-    SEODescription: string | null;
-    title: string | null;
-    landingTitle: string | null;
-    featuredTitle: string | null;
-    Content: {
-      __component: string;
-      id: number;
-      title: string;
-      text: string;
-      items: {
-        id: number;
-        title: string;
-        image: string;
-      }[];  // Array of items for the carousel
-    }[];
-    landingMedia: {
-      id: number;
-      url: string;
-      type: string;
-    }[];
-    featuredMedia: {
-      id: number;
-      url: string;
-      description: string;
-    } | null;
-    localizations: {
-      locale: string;
-      data: {
-        title: string;
-        description?: string; // Optional field
-      };
-    }[];
+// Interface for the media file attributes
+interface MediaAttributes {
+  __typename: string; // GraphQL typename for the file attributes
+  url: string; // URL of the media file
+  mime: string; // MIME type of the media file
+}
+
+// Interface for the media data (with nested data)
+interface MediaData {
+  __typename: string; // GraphQL typename for the media entity
+  data: { // Nested `data` object that contains the actual media details
+    __typename: string; // GraphQL typename for the inner data
+    attributes: MediaAttributes; // Media attributes, containing URL and mime type
   };
 }
 
+// Interface for each block in the 'Blocks' array
+interface Block {
+  __typename: string; // GraphQL typename for the block
+  id: string; // Unique block ID
+  Text: string | null; // Optional block text
+  mediaURL: string | null; // Optional URL for media
+  Title: string | null; // Optional title of the block
+  Media: MediaData; // Media data associated with the block
+}
+
+// Interface for the main TechTopRecData component
+interface TechTopRecData {
+  __typename: string; // GraphQL typename for the main component
+  Title: string; // Title of the top recommendations section
+  Text: string | null; // Optional text for the section
+  text_Spacing: string | null; // Optional text spacing
+  blockSize: string; // Block size, e.g., "Quarter"
+  navSlug: string | null; // Optional navigation slug
+  navTitle: string | null; // Optional navigation title
+  colorTheme: string | null; // Optional color theme
+  navigationSlug: string | null; // Optional navigation slug
+  Blocks: Block[]; // Array of blocks
+}
+
 interface CarouselProps {
-  TechTopRecData: TechTopRecDataType; // Carousel expects TechTopRecData as a prop
+  TechTopRecData: TechTopRecData; // Carousel expects TechTopRecData as a prop
 }
 
 const Carousel: React.FC<CarouselProps> = ({ TechTopRecData }) => {
   // Accessing the first Content object and its items
-  const slides = TechTopRecData.results.Content[0].items;
+  const slides = TechTopRecData.Blocks;
   const [slideIndex, setSlideIndex] = useState<number>(0);
 
   // Function to move to the next set of 4 items
@@ -81,21 +75,23 @@ const Carousel: React.FC<CarouselProps> = ({ TechTopRecData }) => {
 
   return (
     <div className="flex justify-center items-center bg-white py-8">
-      <div className="relative  w-[1100px]">
+      <div className="relative w-[1100px]">
         {/* Carousel Items */}
         <div className="flex space-x-4 overflow-hidden">
           {getCurrentSlideItems(slideIndex).map((item) => (
-            <div key={item.id} className={`text-center  w-full`}>
-              <div className="relative w-full h-64">
+            <div key={item.id} className="text-center w-full">
+              <div className="relative w-full h-[300px]"> {/* Set a fixed height for each image container */}
                 {/* Image */}
                 <Image
-                  alt={item.title}  // Set alt text to the item title
+                  alt={item.Title || "Image"}  // Set alt text to the item title
                   className="object-cover mx-auto"
-                  src={item.image}  // Use item.image as the source
-                  layout="fill" // Image will fill its container
+                  src={item.Media.data.attributes.url || ""}  // Use item.image as the source
+                  layout="intrinsic" // Use intrinsic layout to ensure proper scaling
+                  width={400} // Set width to ensure the image has a fixed size
+                  height={300} // Set a fixed height for the image
                 />
               </div>
-              <p className="mt-2 text-sm text-gray-500">{item.title}</p>  {/* Display the item title */}
+              <p className="mt-2 text-sm text-gray-500">{item.Title}</p>  {/* Display the item title */}
             </div>
           ))}
         </div>

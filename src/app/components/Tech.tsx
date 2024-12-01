@@ -1,80 +1,68 @@
 import React from 'react';
 import TechnologyTune from './TechnologyTune';
 import TechTopRec from './TechTopRec';
-interface LandingMediaType {
-    id: number;
-    url: string;
-    type: string;
-  }
+interface Podcast {
+  __typename: string; // GraphQL typename for the podcast item
+  playlistUrl: string; // HTML embed code as a string
+  noteText: string | null; // Optional note text
+}
 
-   type FeaturedMediaType = {
-    id: number;
-    url: string;
-    description: string;
-  } | null;
+interface TechnologyTuneData {
+  __typename: string; // GraphQL typename for the main component
+  Title: string; // Title of the section
+  Text: string; // HTML text content
+  navigationSlug: string; // Navigation slug
+  colorTheme: string; // Color theme
+  Podcasts: Podcast[]; // Array of podcast objects
+}
   
-  interface LocalizationType {
-    locale: string;
-    data: {
-      title: string;
-      description?: string; // Optional field
-    };
-  }
+// Interface for the media file attributes
+interface MediaAttributes {
+  __typename: string; // GraphQL typename for the file attributes
+  url: string; // URL of the media file
+  mime: string; // MIME type of the media file
+}
+
+// Interface for the media data (with nested data)
+interface MediaData {
+  __typename: string; // GraphQL typename for the media entity
+  data: { // Nested `data` object that contains the actual media details
+    __typename: string; // GraphQL typename for the inner data
+    attributes: MediaAttributes; // Media attributes, containing URL and mime type
+  };
+}
+
+// Interface for each block in the 'Blocks' array
+interface Block {
+  __typename: string; // GraphQL typename for the block
+  id: string; // Unique block ID
+  Text: string | null; // Optional block text
+  mediaURL: string | null; // Optional URL for media
+  Title: string | null; // Optional title of the block
+  Media: MediaData; // Media data associated with the block
+}
+
+// Interface for the main TechTopRecData component
+interface TechTopRecData {
+  __typename: string; // GraphQL typename for the main component
+  Title: string; // Title of the top recommendations section
+  Text: string | null; // Optional text for the section
+  text_Spacing: string | null; // Optional text spacing
+  blockSize: string; // Block size, e.g., "Quarter"
+  navSlug: string | null; // Optional navigation slug
+  navTitle: string | null; // Optional navigation title
+  colorTheme: string | null; // Optional color theme
+  navigationSlug: string | null; // Optional navigation slug
+  Blocks: Block[]; // Array of blocks
+}
+
+
+
 
 interface TechProps {
-    TechnologyTuneData: {
-        status: number;
-        results: {
-          id: number;
-          Title: string;
-          Slug: string;
-          published_at: string;
-          created_at: string;
-          updated_at: string;
-          locale: string;
-          SEOTitle: null | string;
-          SEODescription: null | string;
-          localizations: never[];
-          Content?: {
-            items: {
-              playlistUrl: JSX.Element;
-              noteText: string;
-            }[];
-          }[];
-        };
-      },
-  TechTopRecData: {
-    status: number;
-    results: {
-      id: number;
-      Title: string;
-      Slug: string;
-      published_at: string;
-      created_at: string;
-      updated_at: string;
-      locale: string;
-      SEOTitle: string | null;
-      SEODescription: string | null;
-      title: string | null;
-      landingTitle: string | null;
-      featuredTitle: string | null;
-      Content: {
-        __component: string;
-        id: number;
-        title: string;
-        text: string;
-        items: {
-          id: number;
-          title: string;
-          image: string;
-        }[];
-      }[];
-      landingMedia: LandingMediaType[]; // Replace with the actual structure
-      featuredMedia: FeaturedMediaType | null; // Replace with the actual structure
-      localizations: LocalizationType[]; // Replace with the actual structure
-    };
-}}
-
+  TechnologyTuneData: TechnologyTuneData; // Props for the TechnologyTune component
+  TechTopRecData: TechTopRecData; // Props for the TechTopRec component
+}
 export default function Tech({ TechnologyTuneData, TechTopRecData }: TechProps) {
   return (
     <div className="grid grid-cols-12 gap-4 bg-slate-100 ">

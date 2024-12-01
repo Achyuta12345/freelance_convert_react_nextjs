@@ -353,118 +353,123 @@ export const modalData = {
 };
 
 
-export const TechnologyTuneData = {
-  status: 200,
-  results: {
-    id: 8,
-    Title: "Homepage",
-    Slug: "homepage",
-    published_at: "2022-06-10T09:12:38.090Z",
-    created_at: "2022-01-26T00:27:31.290Z",
-    updated_at: "2023-08-30T16:35:06.899Z",
-    locale: "en",
-    SEOTitle: null,
-    SEODescription: null,
-    title: null,
-    landingTitle: null,
-    featuredTitle: null,
-    Content: [
+export const TechnologyTuneData =  {
+  "__typename": "ComponentCnTechHubPodcasts",
+  "Title": "Technology Tunes",
+  "Text": "<p>Here's what Technology is listening to lately.</p>",
+  "navigationSlug": "homepage-technology-songs",
+  "colorTheme": "Blue",
+  "Podcasts": [
       {
-        id: 1,
-        __component: "cn-component.spotify",
-        items: [
-          {
-            id: 2,
-            playlistUrl: (
-              <iframe
-                style={{ borderRadius: "12px" }}
-                src="https://open.spotify.com/embed/playlist/6JLFD8H2R2jlCCWufAOQ9Y?utm_source=generator&theme=0"
-                width="100%"
-                height="352"
-                frameBorder="0"
-                allowFullScreen
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-              ></iframe>
-            ),
-            noteTitle:'Technology Tunes',
-            noteText: "Jam out to what Condenast tech team has to play this month!",
-          },
-        ],
-        colorTheme: "Black",
-      },
-    ],
-    landingMedia: [],
-    featuredMedia: null,
-    localizations: [],
-  },
+          "__typename": "ComponentCnTechHubPlaylists",
+          "playlistUrl": "<iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/playlist/6bOKVksEjh99hsbjUx8mEH?utm_source=generator&theme=0\" width=\"100%\" height=\"352\" frameBorder=\"0\" allowfullscreen=\"\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>",
+          "noteText": null
+      }
+  ]
 };
 
 
 
-export const TechTopRecData = {
-  status: 200,
-  results: {
-    id: 8,
-    Title: "Homepage",
-    Slug: "homepage",
-    published_at: "2022-06-10T09:12:38.090Z",
-    created_at: "2022-01-26T00:27:31.290Z",
-    updated_at: "2023-08-30T16:35:06.899Z",
-    locale: "en",
-    SEOTitle: null,
-    SEODescription: null,
-    title: null,
-    landingTitle: null,
-    featuredTitle: null,
-    Content: [
+export const TechTopRecData =  {
+  "__typename": "ComponentCnTechHubBlockContentFeedCarousel",
+  "Title": "Tech’s Top Recs",
+  "Text": null,
+  "text_Spacing": null,
+  "blockSize": "Quarter",
+  "navSlug": null,
+  "navTitle": null,
+  "colorTheme": null,
+  "navigationSlug": null,
+  "Blocks": [
       {
-          __component: "cn-components.multi-image-card",
-          id: 19,
-          title: "Tech’s Top Recs",
-          text: "Discover the...",
-          items: [
-            {
-              id: 1,
-              title: "Get ready for “The Bear” Season 2 this August",
-              image:
-                "https://cn-strapidev-v4.s3.amazonaws.com/Landscape_4_3_496527b3c8.png",
-            },
-            {
-              id: 2,
-              title: "'Oppenheimer' Blazes Past Massive Milestone",
-              image:
-                "https://cn-strapidev-v4.s3.amazonaws.com/Landscape_4_3_1_e49dd321a5.png",
-            },
-            {
-              id: 3,
-              title: "Taylor Swift The Eras Tour setlist",
-              image:
-                "https://cn-strapidev-v4.s3.amazonaws.com/Landscape_4_3_2_6dd59e3e03.png",
-            },
-            {
-              id: 4,
-              title: "CNT: The 23 Best Places to Go in 2023",
-              image:
-                "https://cn-strapidev-v4.s3.amazonaws.com/Landscape_4_3_3_848ea4f610.png",
-            },
-            {
-              id: 5,
-              title: "CNT: The 23 Best Places to Go in 2023",
-              image:
-                "https://cn-strapidev-v4.s3.amazonaws.com/Landscape_4_3_3_848ea4f610.png",
-            },
-            {
-              id: 6,
-              title: "CNT: The 23 Best Places to Go in 2023",
-              image:
-                "https://cn-strapidev-v4.s3.amazonaws.com/Landscape_4_3_3_848ea4f610.png",
-            }
-          ],
-        }
-    ],
-    landingMedia: [],
-    featuredMedia: null,
-    localizations: [],
-  },
+          "__typename": "ComponentCnComponentsBlocks",
+          "id": "565",
+          "Text": null,
+          "mediaURL": null,
+          "Title": "tech top recs 1st",
+          "Media": {
+              "__typename": "UploadFileEntityResponse",
+              "data": {
+                  "__typename": "UploadFileEntity",
+                  "attributes": {
+                      "__typename": "UploadFile",
+                      "url": "https://strapi-bus-eng-prod.s3.us-east-1.amazonaws.com/Component_4_1_58dbecaf1d.png",
+                      "mime": "image/png"
+                  }
+              }
+          }
+      },
+      {
+          "__typename": "ComponentCnComponentsBlocks",
+          "id": "566",
+          "Text": null,
+          "mediaURL": null,
+          "Title": "tech top recs 2nd",
+          "Media": {
+              "__typename": "UploadFileEntityResponse",
+              "data": {
+                  "__typename": "UploadFileEntity",
+                  "attributes": {
+                      "__typename": "UploadFile",
+                      "url": "https://strapi-bus-eng-prod.s3.us-east-1.amazonaws.com/Component_4_1_58dbecaf1d.png",
+                      "mime": "image/png"
+                  }
+              }
+          }
+      },
+      {
+          "__typename": "ComponentCnComponentsBlocks",
+          "id": "572",
+          "Text": null,
+          "mediaURL": null,
+          "Title":"tech top recs 3rd",
+          "Media": {
+              "__typename": "UploadFileEntityResponse",
+              "data": {
+                  "__typename": "UploadFileEntity",
+                  "attributes": {
+                      "__typename": "UploadFile",
+                      "url": "https://strapi-bus-eng-prod.s3.us-east-1.amazonaws.com/Component_4_1_58dbecaf1d.png",
+                      "mime": "image/png"
+                  }
+              }
+          }
+      },
+      {
+          "__typename": "ComponentCnComponentsBlocks",
+          "id": "573",
+          "Text": null,
+          "mediaURL": null,
+          "Title": "tech top recs 4th",
+          "Media": {
+              "__typename": "UploadFileEntityResponse",
+              "data": {
+                  "__typename": "UploadFileEntity",
+                  "attributes": {
+                      "__typename": "UploadFile",
+                      "url": "https://strapi-bus-eng-prod.s3.us-east-1.amazonaws.com/Component_4_1_58dbecaf1d.png",
+                      "mime": "image/png"
+                  }
+              }
+          }
+      },
+      {
+          "__typename": "ComponentCnComponentsBlocks",
+          "id": "574",
+          "Text": null,
+          "mediaURL": null,
+          "Title": '"tech top recs 5th',
+          "Media": {
+              "__typename": "UploadFileEntityResponse",
+              "data": {
+                  "__typename": "UploadFileEntity",
+                  "attributes": {
+                      "__typename": "UploadFile",
+                      "url": "https://strapi-bus-eng-prod.s3.us-east-1.amazonaws.com/Component_4_1_58dbecaf1d.png",
+                      "mime": "image/png"
+                  }
+              }
+          }
+      }
+  ]
 };
