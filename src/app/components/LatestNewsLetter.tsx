@@ -281,7 +281,7 @@ let title =latestNewsLetterData.Title;
       <Section
         id={navSlug || "newsletterMediaText"}
         className={classNames(
-          "relative overflow-hidden  col-span-6 ",
+          "relative overflow-hidden  col-span-6 px-8 ",
           margin !== "None" && "my-0 md:my-0",
           colorTheme === "Grey" && "text-white",
           colorTheme === "Black" && "bg-black text-white ",
