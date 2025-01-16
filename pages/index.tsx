@@ -1,5 +1,6 @@
 // pages/index.tsx
 
+import CondeNastTechnology from '@/app/components/CondeNastTechnology';
 import Header from '@/app/components/Header';
 import { MultipleBlock } from '@/app/components/MultipleBlock';
 import TechHubTutorial from '@/app/components/TechHubTutorial';
@@ -26,7 +27,8 @@ const Home: React.FC = () => {
           libero"/>
    <MultipleBlock/>
    <TechHubTutorial imageUrl="https://storage.googleapis.com/a1aa/image/FcodR1ftfjqwX0aJ6lYfpy8SeeRv8S9e13ImDjlRHxb7pQI9E.jpg" title="Mater The Tech Hub With This Tutorial" tutorialUrl="https://www.youtube.com/@freecodecamp"/>
-   <VerticalCardMultiImage/>
+   {/* <VerticalCardMultiImage/> */}
+   <CondeNastTechnology/>
    </>   
   );
 };
